@@ -1,7 +1,5 @@
 package andrewoid.neuralnetwork;
 
-import java.util.Arrays;
-
 /**
  * Simple building block of Neural Networks that holds a value, bias, weights to the previous layer and
  * methods to update itself when training.
@@ -20,6 +18,7 @@ public class Neuron {
     private double value;
     private double derivative;
     private double error;
+
     /**
      * Construct a Neuron connected to the previous layer of Neurons
      *
@@ -103,7 +102,6 @@ public class Neuron {
 
     /**
      * Compute the error if the Neuron was in an inner layer of the network.
-     *
      */
     public void computeInnerError() {
         double sum = 0;

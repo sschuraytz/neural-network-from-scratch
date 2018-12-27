@@ -5,20 +5,19 @@ import java.util.Random;
 
 /**
  * Demonstration to train a Network to recognize calculator digits. Calculator digits have 7 possible inputs and 10 possible outputs</br>
- *  _</br>
+ * _</br>
  * |_|</br>
  * |_|</br>
- *
+ * <p>
  * The indexes of these inputs are read from top to bottom, left to right.</br>
- *
+ * <p>
  * The number 1 has the following inputs</br>
  * 0, 0, 1, 0, 0, 1, 0</br>
- *
+ * <p>
  * The number 6 has the following inputs</br>
  * 1, 1, 0, 1, 1, 1, 1</br>
- *
+ * <p>
  * For the purpose of this demonstration we are
- *
  */
 public class CalculatorNetworkTraining {
 
@@ -65,7 +64,7 @@ public class CalculatorNetworkTraining {
             outputs = network.evaluate(input);
             System.out.print(Arrays.toString(input));
             System.out.print(" = ");
-            for (int i=0; i<outputs.length; i++) {
+            for (int i = 0; i < outputs.length; i++) {
                 double value = outputs[i].getValue();
                 if (value > 0.10) {
                     System.out.print(i);

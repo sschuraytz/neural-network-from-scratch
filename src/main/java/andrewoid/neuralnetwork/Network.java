@@ -1,8 +1,6 @@
 package andrewoid.neuralnetwork;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +33,12 @@ public class Network {
             }
             layers[i] = layer;
         }
+    }
+
+    public static String toString(Neuron layer[], double threshold) {
+        return Arrays.stream(layer)
+                .map(n -> n.getValue() > threshold ? String.valueOf(n.getValue()) : "_")
+                .collect(Collectors.joining(", "));
     }
 
     /**
@@ -92,12 +96,6 @@ public class Network {
                 n.updateWeights(learningRate);
             }
         }
-    }
-
-    public static String toString(Neuron layer[], double threshold) {
-        return Arrays.stream(layer)
-                .map( n -> n.getValue() > threshold ? String.valueOf(n.getValue()) : "_")
-                .collect(Collectors.joining(", "));
     }
 
 }
