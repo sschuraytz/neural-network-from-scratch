@@ -1,8 +1,10 @@
+package andrewoid.neuralnetwork;
+
 import java.util.Arrays;
 import java.util.Random;
 
 /**
- * We are training our Network to recognize calculator digits. Calculator digits have 7 possible inputs and 10 possible outputs</br>
+ * Demonstration to train a andrewoid.neuralnetwork.Network to recognize calculator digits. Calculator digits have 7 possible inputs and 10 possible outputs</br>
  *  _</br>
  * |_|</br>
  * |_|</br>

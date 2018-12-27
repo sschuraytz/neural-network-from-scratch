@@ -1,3 +1,5 @@
+package andrewoid.neuralnetwork;
+
 public class Neuron {
 
     private static final double BIAS_UPPER = 0.7;
@@ -11,7 +13,7 @@ public class Neuron {
     private double derivative;
     private double error;
     /**
-     * Construct a Neuron connected to the previous layer of Neurons
+     * Construct a andrewoid.neuralnetwork.Neuron connected to the previous layer of Neurons
      *
      * @param previousLayer
      */
@@ -67,7 +69,7 @@ public class Neuron {
     }
 
     /**
-     * Computer the value of this Neuron given the previousLayer and weights.
+     * Computer the value of this andrewoid.neuralnetwork.Neuron given the previousLayer and weights.
      */
     public void computeValue() {
         double sum = bias;
@@ -81,7 +83,7 @@ public class Neuron {
     }
 
     /**
-     * Compute the error if the Neuron was in the outer most layer.
+     * Compute the error if the andrewoid.neuralnetwork.Neuron was in the outer most layer.
      *
      * @param expectedValue
      */
@@ -90,7 +92,7 @@ public class Neuron {
     }
 
     /**
-     * Compute the error if the Neuron was in an inner layer of the network.
+     * Compute the error if the andrewoid.neuralnetwork.Neuron was in an inner layer of the network.
      *
      * @param sum
      */

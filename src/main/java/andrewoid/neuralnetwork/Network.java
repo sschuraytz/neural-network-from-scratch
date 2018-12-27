@@ -1,8 +1,10 @@
+package andrewoid.neuralnetwork;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Neural Network object
+ * Neural andrewoid.neuralnetwork.Network object
  */
 public class Network {
 
