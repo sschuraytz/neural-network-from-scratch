@@ -1,5 +1,34 @@
 public class Neuron {
 
+    private static final double BIAS_UPPER = 0.7;
+    private static final double BIAS_LOWER = 0.3;
+    private static final double WEIGHT_UPPER = 0.5;
+    private static final double WEIGHT_LOWER = 0.1;
+    private Neuron previousLayer[];
+    private double weights[];
+    private double bias;
+    private double value;
+    private double derivative;
+    private double error;
+    /**
+     * Construct a Neuron connected to the previous layer of Neurons
+     *
+     * @param previousLayer
+     */
+    public Neuron(Neuron[] previousLayer) {
+        this.previousLayer = previousLayer;
+
+        // if previousLayer is null then this is the first layer of the network.
+        if (previousLayer != null) {
+            weights = new double[previousLayer.length];
+            for (int i = 0; i < weights.length; i++) {
+                weights[i] = randomInBounds(WEIGHT_LOWER, WEIGHT_UPPER);
+            }
+        }
+
+        bias = randomInBounds(BIAS_LOWER, BIAS_UPPER);
+    }
+
     /**
      * @param value
      * @return the sigmoid of the specified value
@@ -15,37 +44,6 @@ public class Neuron {
      */
     private static double randomInBounds(double lower, double upper) {
         return Math.random() * (upper - lower) + lower;
-    }
-
-    private static final double BIAS_UPPER = 0.7;
-    private static final double BIAS_LOWER = 0.3;
-    private static final double WEIGHT_UPPER = 0.5;
-    private static final double WEIGHT_LOWER = 0.1;
-
-    private Neuron previousLayer[];
-    private double weights[];
-    private double bias;
-
-    private double value;
-    private double derivative;
-    private double error;
-
-    /**
-     * Construct a Neuron connected to the previous layer of Neurons
-     * @param previousLayer
-     */
-    public Neuron(Neuron[] previousLayer) {
-        this.previousLayer = previousLayer;
-
-        // if previousLayer is null then this is the first layer of the network.
-        if (previousLayer != null) {
-            weights = new double[previousLayer.length];
-            for (int i = 0; i < weights.length; i++) {
-                weights[i] = randomInBounds(WEIGHT_LOWER, WEIGHT_UPPER);
-            }
-        }
-
-        bias = randomInBounds(BIAS_LOWER, BIAS_UPPER);
     }
 
     public double getValue() {
@@ -84,6 +82,7 @@ public class Neuron {
 
     /**
      * Compute the error if the Neuron was in the outer most layer.
+     *
      * @param expectedValue
      */
     public void computeOuterError(double expectedValue) {
@@ -92,13 +91,16 @@ public class Neuron {
 
     /**
      * Compute the error if the Neuron was in an inner layer of the network.
+     *
      * @param sum
      */
     public void computeInnerError(double sum) {
         error = sum * derivative;
     }
+
     /**
      * Updates the weights given the previousLayer and the learningRate
+     *
      * @param learningRate
      */
     public void updateWeights(double learningRate) {

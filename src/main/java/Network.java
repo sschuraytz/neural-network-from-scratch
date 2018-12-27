@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,9 +10,10 @@ public class Network {
 
     /**
      * Construct a neural network with layers and different number of Neurons per layer
+     *
      * @param sizes
      */
-    public Network(int ... sizes) {
+    public Network(int... sizes) {
         layers = new ArrayList<>();
         Neuron[] previousLayer = null;
         for (int size : sizes) {
@@ -27,7 +27,6 @@ public class Network {
     }
 
     /**
-     *
      * @param inputs
      * @return the output layer after evaluating the given inputs
      */
@@ -48,6 +47,7 @@ public class Network {
 
     /**
      * Train the network on input data, expected output and a learning rate.
+     *
      * @param inputs
      * @param expectedOutputs
      * @param learningRate
@@ -85,24 +85,6 @@ public class Network {
                 n.updateWeights(learningRate);
             }
         }
-    }
-
-    public static void main(String args[]) {
-        Network network = new Network(4, 1, 3, 4);
-
-        double inputs[] = {0.1, 0.5, 0.2, 0.9};
-        double expectedOutputs[] = {0, 1, 0, 0};
-        Neuron outputs[];
-
-        outputs = network.evaluate(inputs);
-        System.out.println(Arrays.toString(outputs));
-
-        for (int i = 0; i < 10000; i++) {
-            network.train(inputs, expectedOutputs, 1);
-        }
-
-        outputs = network.evaluate(inputs);
-        System.out.println(Arrays.toString(outputs));
     }
 
 }
