@@ -60,7 +60,7 @@ public class Neuron {
             sum += n.value * weight;
         }
         value = sigmoid(sum);
-        derivative = value * (1.0-value);
+        derivative = value * (1.0 - value);
     }
 
     public void computeOuterError(double expectedValue) {
@@ -80,14 +80,6 @@ public class Neuron {
         return error;
     }
 
-    public double getDerivative() {
-        return derivative;
-    }
-
-    public void setError(double error) {
-        this.error = error;
-    }
-
     public void updateWeights(double learningRate) {
         if (weights == null) {
             // first layer
@@ -103,7 +95,4 @@ public class Neuron {
         }
     }
 
-    public void updateBias(double delta) {
-        bias += delta;
-    }
 }
