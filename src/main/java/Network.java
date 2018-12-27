@@ -2,13 +2,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Neural Network object
+ */
 public class Network {
 
-    private List<Neuron[]> layers;
+    private final List<Neuron[]> layers;
 
-    public Network(int... sizes) {
+    /**
+     * Construct a neural network with layers and different number of Neurons per layer
+     * @param sizes
+     */
+    public Network(int ... sizes) {
         layers = new ArrayList<>();
-        int layerNum = 0;
         Neuron[] previousLayer = null;
         for (int size : sizes) {
             Neuron layer[] = new Neuron[size];
@@ -20,7 +26,12 @@ public class Network {
         }
     }
 
-    public Neuron[] calculate(double... inputs) {
+    /**
+     *
+     * @param inputs
+     * @return the output layer after evaluating the given inputs
+     */
+    public Neuron[] evaluate(double... inputs) {
         Neuron firstLayer[] = layers.get(0);
         for (int i = 0; i < inputs.length; i++) {
             firstLayer[i].setValue(inputs[i]);
@@ -35,13 +46,19 @@ public class Network {
         return layers.get(layers.size() - 1);
     }
 
+    /**
+     * Train the network on input data, expected output and a learning rate.
+     * @param inputs
+     * @param expectedOutputs
+     * @param learningRate
+     */
     public void train(double inputs[], double expectedOutputs[], double learningRate) {
-        calculate(inputs);
+        evaluate(inputs);
         computerErrors(expectedOutputs);
         updateWeights(learningRate);
     }
 
-    public void computerErrors(double expectedOutputs[]) {
+    private void computerErrors(double expectedOutputs[]) {
         Neuron outputs[] = layers.get(layers.size() - 1);
         // compute the errors of the outer layer
         for (int i = 0; i < outputs.length; i++) {
@@ -63,8 +80,8 @@ public class Network {
     }
 
     private void updateWeights(double learningRate) {
-        for (Neuron layer[] : layers) {
-            for (Neuron n : layer) {
+        for (int i = 1; i < layers.size(); i++) {
+            for (Neuron n : layers.get(i)) {
                 n.updateWeights(learningRate);
             }
         }
@@ -77,14 +94,14 @@ public class Network {
         double expectedOutputs[] = {0, 1, 0, 0};
         Neuron outputs[];
 
-        outputs = network.calculate(inputs);
+        outputs = network.evaluate(inputs);
         System.out.println(Arrays.toString(outputs));
 
         for (int i = 0; i < 10000; i++) {
             network.train(inputs, expectedOutputs, 1);
         }
 
-        outputs = network.calculate(inputs);
+        outputs = network.evaluate(inputs);
         System.out.println(Arrays.toString(outputs));
     }
 
