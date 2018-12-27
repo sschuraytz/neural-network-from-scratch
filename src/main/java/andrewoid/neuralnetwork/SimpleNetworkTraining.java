@@ -3,7 +3,7 @@ package andrewoid.neuralnetwork;
 import java.util.Arrays;
 
 /**
- * Demonstration to train a andrewoid.neuralnetwork.Network on random values.
+ * Demonstration to train a Network on random values.
  */
 public class SimpleNetworkTraining {
     public static void main(String args[]) {

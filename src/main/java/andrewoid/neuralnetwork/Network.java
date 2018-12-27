@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Neural andrewoid.neuralnetwork.Network object
+ * Multi layer Neural Network object that encapsulates evaluation and training.
  */
 public class Network {
 
