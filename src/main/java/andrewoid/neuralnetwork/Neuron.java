@@ -1,5 +1,7 @@
 package andrewoid.neuralnetwork;
 
+import java.util.Arrays;
+
 /**
  * Simple building block of Neural Networks that holds a value, bias, weights to the previous layer and
  * methods to update itself when training.
@@ -10,7 +12,9 @@ public class Neuron {
     private static final double BIAS_LOWER = 0.3;
     private static final double WEIGHT_UPPER = 0.5;
     private static final double WEIGHT_LOWER = 0.1;
-    private Neuron previousLayer[];
+    private int index;
+    private Neuron[] previousLayer;
+    private Neuron[] nextLayer;
     private double weights[];
     private double bias;
     private double value;
@@ -21,8 +25,10 @@ public class Neuron {
      *
      * @param previousLayer
      */
-    public Neuron(Neuron[] previousLayer) {
+    public Neuron(int index, Neuron[] previousLayer, Neuron[] nextLayer) {
+        this.index = index;
         this.previousLayer = previousLayer;
+        this.nextLayer = nextLayer;
 
         // if previousLayer is null then this is the first layer of the network.
         if (previousLayer != null) {
@@ -98,9 +104,12 @@ public class Neuron {
     /**
      * Compute the error if the Neuron was in an inner layer of the network.
      *
-     * @param sum
      */
-    public void computeInnerError(double sum) {
+    public void computeInnerError() {
+        double sum = 0;
+        for (Neuron neuron : nextLayer) {
+            sum += (neuron.getWeight(index) * neuron.getError());
+        }
         error = sum * derivative;
     }
 
@@ -123,5 +132,6 @@ public class Neuron {
     public String toString() {
         return String.valueOf(value);
     }
+
 
 }

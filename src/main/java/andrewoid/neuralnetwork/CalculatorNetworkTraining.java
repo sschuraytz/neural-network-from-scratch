@@ -65,10 +65,11 @@ public class CalculatorNetworkTraining {
             outputs = network.evaluate(input);
             System.out.print(Arrays.toString(input));
             System.out.print(" = ");
-            for (int i = 0; i < outputs.length; i++) {
-                if (outputs[i].getValue() > 0.10) {
+            for (int i=0; i<outputs.length; i++) {
+                double value = outputs[i].getValue();
+                if (value > 0.10) {
                     System.out.print(i);
-                    System.out.print(", ");
+                    System.out.print(" ");
                 }
             }
             System.out.println();
