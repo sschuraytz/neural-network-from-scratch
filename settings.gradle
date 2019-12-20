@@ -1,2 +1,4 @@
 rootProject.name = 'neural-network-from-scratch'
+include 'library'
+include 'example'
 

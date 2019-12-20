@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'neural-network-from-scratch'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'andrewoid.neuralnetwork.CalculatorNetworkTraining'
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

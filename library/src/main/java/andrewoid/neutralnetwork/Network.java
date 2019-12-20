@@ -1,10 +1,10 @@
-package andrewoid.neuralnetwork;
+package andrewoid.neutralnetwork;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * Multi layer Neural Network object that encapsulates evaluation and training.
+ * Multi layer Neural andrewoid.neutralnetwork.Network object that encapsulates evaluation and training.
  */
 public class Network {
 
@@ -23,7 +23,7 @@ public class Network {
             layers[i] = new Neuron[sizes[i]];
         }
 
-        // create each Neuron with links to the previous and next layers
+        // create each andrewoid.neutralnetwork.Neuron with links to the previous and next layers
         for (int i = 0; i < sizes.length; i++) {
             Neuron layer[] = layers[i];
             for (int j = 0; j < layer.length; j++) {

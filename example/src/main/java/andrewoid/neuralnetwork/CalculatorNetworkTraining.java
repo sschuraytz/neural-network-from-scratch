@@ -1,5 +1,8 @@
 package andrewoid.neuralnetwork;
 
+import andrewoid.neutralnetwork.Network;
+import andrewoid.neutralnetwork.Neuron;
+
 import java.util.Arrays;
 import java.util.Random;
 

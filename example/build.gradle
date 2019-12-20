@@ -1,4 +1,6 @@
-apply plugin: 'java'
+plugins {
+    id 'java'
+}
 
 sourceCompatibility = 1.8
 
@@ -7,5 +9,6 @@ repositories {
 }
 
 dependencies {
+    implementation project(':library')
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
