@@ -1,9 +1,7 @@
-package andrewoid.neuralnetwork;
+package andrewoid.neuralnetwork.digit_ui;
 
 import andrewoid.neutralnetwork.Network;
 import andrewoid.neutralnetwork.Neuron;
-import andrewoid.neutralnetwork.DigitFrame;
-
 import java.util.Random;
 
 public class DigitInteraction {
@@ -28,7 +26,7 @@ public class DigitInteraction {
                 {1, 1, 1, 1, 0, 1, 0}, // 9
         };
 
-        double expectedOutputs[][] = new double[][]{
+        double expectedOutputs[][] = new double[][] {
                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 0
                 {0, 1, 0, 0, 0, 0, 0, 0, 0, 0}, // 1
                 {0, 0, 1, 0, 0, 0, 0, 0, 0, 0}, // 2
