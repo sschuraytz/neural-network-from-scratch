@@ -12,9 +12,6 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 
 public class DrawingComponent extends JComponent {
-    public BufferedImage getBuffImage() {
-        return buffImage;
-    }
 
     private BufferedImage buffImage = new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB);
     private Point startPoint;
