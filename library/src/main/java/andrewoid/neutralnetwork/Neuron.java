@@ -13,7 +13,7 @@ public class Neuron {
     private int index;
     private Neuron[] previousLayer;
     private Neuron[] nextLayer;
-    private double weights[];
+    private double[] weights;
     private double bias;
     private double value;
     private double derivative;
