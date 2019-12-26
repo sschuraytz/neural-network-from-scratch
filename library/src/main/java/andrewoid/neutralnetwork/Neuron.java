@@ -73,6 +73,10 @@ public class Neuron {
         return weights[index];
     }
 
+    public int getNumWeights() {
+        return weights == null ? 0 : weights.length;
+    }
+
     public double getError() {
         return error;
     }
