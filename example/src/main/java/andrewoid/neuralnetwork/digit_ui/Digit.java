@@ -27,30 +27,30 @@ public class Digit extends JPanel {
             switch (line) {
                 case 0:
                     xPosition = sideMargin;
-                    yPosition = topMargin;
+                    yPosition = topMargin - (2 * lineThickness);
                     width = lineLength;
                     height = lineThickness;
                     break;
                 case 1:
-                    xPosition = sideMargin;
-                    yPosition = topMargin;
+                    xPosition = sideMargin - lineThickness;
+                    yPosition = topMargin - lineThickness;
                     width = lineThickness;
                     height = lineLength;
                     break;
                 case 2:
                     xPosition = sideMargin + lineLength;
-                    yPosition = topMargin;
+                    yPosition = topMargin - lineThickness;
                     width = lineThickness;
                     height = lineLength;
                     break;
                 case 3:
                     xPosition = sideMargin;
-                    yPosition = topMargin + lineLength;
+                    yPosition = topMargin + lineLength - lineThickness;
                     width = lineLength;
                     height = lineThickness;
                     break;
                 case 4:
-                    xPosition = sideMargin;
+                    xPosition = sideMargin - lineThickness;
                     yPosition = topMargin + lineLength;
                     width = lineThickness;
                     height = lineLength;
