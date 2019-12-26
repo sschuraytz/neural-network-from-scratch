@@ -2,10 +2,7 @@ package andrewoid.neuralnetwork.MNISTReader;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 
 public class IdxReader
@@ -14,8 +11,8 @@ public class IdxReader
     private String inputImagePath;
     private String inputLabelPath;
     private String outputPath;
-    private FileInputStream inImage = null;
-    private FileInputStream inLabel = null;
+    private InputStream inImage = null;
+    private InputStream inLabel = null;
     private int magicNumberImages, numberOfImages, numberOfRows,
             numberOfColumns, magicNumberLabels,
             numberOfLabels, numberOfPixels;
@@ -102,8 +99,8 @@ public class IdxReader
     private void initializeVariables() {
         try {
 
-            inImage = new FileInputStream(inputImagePath);
-            inLabel = new FileInputStream(inputLabelPath);
+            inImage = new BufferedInputStream(new FileInputStream(inputImagePath));
+            inLabel = new BufferedInputStream(new FileInputStream(inputLabelPath));
 
             magicNumberImages = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
             numberOfImages = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
