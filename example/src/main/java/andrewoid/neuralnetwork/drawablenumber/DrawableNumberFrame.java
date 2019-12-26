@@ -7,6 +7,8 @@ import java.awt.Dimension;
 
 public class DrawableNumberFrame extends JFrame {
 
+    private DrawingComponent drawingComponent = new DrawingComponent();
+
     public DrawableNumberFrame() {
         setTitle("Draw a Number");
         setSize(600, 600);
@@ -16,25 +18,23 @@ public class DrawableNumberFrame extends JFrame {
         root.setLayout(new BorderLayout());
         JButton clearButton = new JButton("Clear");
         root.add(clearButton, BorderLayout.SOUTH);
-        root.setBackground(Color.GRAY);
 
         JPanel drawablePanel = new JPanel();
-        JPanel outputPanel = new JPanel();
+        drawablePanel.setLayout(new BorderLayout());
+        drawablePanel.setBackground(Color.PINK);
         JLabel drawableLabel = new JLabel("Draw Your Number Here");
         drawableLabel.setFont(new Font("Sans Serif", Font.BOLD, 16));
+        drawablePanel.add(drawableLabel, BorderLayout.NORTH);
+        drawablePanel.add(drawingComponent, BorderLayout.CENTER);
+
+        JPanel outputPanel = new JPanel();
+        outputPanel.setBackground(Color.YELLOW);
         JLabel outputLabel = new JLabel("Here is Your Number");
         outputLabel.setFont(new Font("Sans Serif", Font.BOLD, 16));
-        drawablePanel.add(drawableLabel, BorderLayout.EAST);
-        outputPanel.add(outputLabel, BorderLayout.CENTER);
-        drawablePanel.setBackground(Color.PINK);
-        outputPanel.setBackground(Color.YELLOW);
+        outputPanel.add(outputLabel);
 
-        root.add(drawablePanel, BorderLayout.WEST);
+        root.add(drawablePanel, BorderLayout.CENTER);
         root.add(outputPanel, BorderLayout.EAST);
-
-        DrawingComponent drawingComponent = new DrawingComponent();
-//        drawablePanel.add(drawingComponent);
-        root.add(drawingComponent);
 
         clearButton.addActionListener(e -> drawingComponent.clearImage());
 
