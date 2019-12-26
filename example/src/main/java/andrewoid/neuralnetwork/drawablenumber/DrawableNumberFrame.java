@@ -35,7 +35,8 @@ public class DrawableNumberFrame extends JFrame {
         DrawingComponent drawingComponent = new DrawingComponent();
 //        drawablePanel.add(drawingComponent);
         root.add(drawingComponent);
-        drawablePanel.add(drawingComponent);
+
+        clearButton.addActionListener(e -> drawingComponent.clearImage());
 
         setContentPane(root);
         root.setVisible(true);

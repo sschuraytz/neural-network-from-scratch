@@ -42,6 +42,13 @@ public class DrawingComponent extends JComponent {
         repaint();
     }
 
+    public void clearImage() {
+        Graphics2D g2d = (Graphics2D) buffImage.getGraphics();
+        g2d.setBackground(new Color(0, 0, 0, 0));
+        g2d.clearRect(buffImage.getMinX(), buffImage.getMinY(), buffImage.getWidth(), buffImage.getHeight());
+        repaint();
+    }
+
     @Override
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
