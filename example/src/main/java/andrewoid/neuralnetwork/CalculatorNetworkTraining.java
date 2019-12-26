@@ -1,5 +1,6 @@
 package andrewoid.neuralnetwork;
 
+import andrewoid.neuralnetwork.MNISTReader.IdxReader;
 import andrewoid.neutralnetwork.Network;
 import andrewoid.neutralnetwork.Neuron;
 
@@ -50,8 +51,8 @@ public class CalculatorNetworkTraining {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 9
     };
 
-    public static void main(String args[]) {
-
+    public static void main(String args[])
+    {
         Network network = new Network(7, 15, 15, 10);
         Neuron outputs[];
         Random random = new Random();
