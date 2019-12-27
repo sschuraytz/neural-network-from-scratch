@@ -6,7 +6,7 @@ import java.awt.*;
 public class DisplayNeuralNetwork extends JFrame {
 
     public DisplayNeuralNetwork() {
-        Network network = new Network(7,15,15, 10);
+        Network network = new Network(7, 15, 15, 10);
         final NeuralNetworkComponent neuralNetworkComponent = new NeuralNetworkComponent(network);
         setTitle("NeuralNetwork");
         setSize(1100, 900);
@@ -15,12 +15,10 @@ public class DisplayNeuralNetwork extends JFrame {
         root.setLayout(new BorderLayout());
         root.add(neuralNetworkComponent, BorderLayout.CENTER);
         setContentPane(root);
-
-
     }
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         DisplayNeuralNetwork frame = new DisplayNeuralNetwork();
         frame.setVisible(true);
     }
-
 }
