@@ -13,16 +13,7 @@ import java.util.stream.Collectors;
  */
 public class Network {
 
-    public Neuron[][] getLayers() {
-        return layers;
-    }
-
     private final Neuron layers[][];
-
-    public Neuron[][] getLayers()
-    {
-        return layers;
-    }
 
     /**
      * Construct a neural network with layers and different number of Neurons per layer
@@ -68,6 +59,11 @@ public class Network {
     public Network(Neuron[][] layers)
     {
         this.layers = layers;
+    }
+
+    public Neuron[][] getLayers()
+    {
+        return layers;
     }
 
     public static String toString(Neuron layer[], double threshold) {
