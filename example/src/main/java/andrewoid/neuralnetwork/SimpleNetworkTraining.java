@@ -1,6 +1,7 @@
 package andrewoid.neuralnetwork;
 
 import andrewoid.neutralnetwork.Network;
+import andrewoid.neutralnetwork.NetworkFactory;
 import andrewoid.neutralnetwork.Neuron;
 
 import java.util.Arrays;
@@ -25,5 +26,7 @@ public class SimpleNetworkTraining {
 
         outputs = network.evaluate(inputs);
         System.out.println(Arrays.toString(outputs));
+
+        network.saveToJSON("network.json");
     }
 }

@@ -1,7 +1,12 @@
 package andrewoid.neutralnetwork;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
 
 /**
  * Multi layer Neural andrewoid.neutralnetwork.Network object that encapsulates evaluation and training.
@@ -13,6 +18,11 @@ public class Network {
     }
 
     private final Neuron layers[][];
+
+    public Neuron[][] getLayers()
+    {
+        return layers;
+    }
 
     /**
      * Construct a neural network with layers and different number of Neurons per layer
@@ -37,6 +47,27 @@ public class Network {
             }
             layers[i] = layer;
         }
+    }
+
+    public void saveToJSON(String fileName)
+    {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try
+        {
+            FileWriter writer = new FileWriter(fileName);
+            gson.toJson(this, writer);
+            writer.flush();
+            writer.close();
+        }
+        catch (IOException exc)
+        {
+            exc.printStackTrace();
+        }
+    }
+
+    public Network(Neuron[][] layers)
+    {
+        this.layers = layers;
     }
 
     public static String toString(Neuron layer[], double threshold) {
@@ -102,4 +133,21 @@ public class Network {
         }
     }
 
+     void connectNeurons()
+    {
+        for (int ix = 0; ix < layers.length; ++ix)
+        {
+            for (int ij = 0; ij < layers[ix].length; ++ij)
+            {
+                if (ix > 0)
+                {
+                    layers[ix][ij].setPreviousLayer(layers[ix - 1]);
+                }
+                if (ix < layers.length - 1)
+                {
+                    layers[ix][ij].setNextLayer(layers[ix + 1]);
+                }
+            }
+        }
+    }
 }
