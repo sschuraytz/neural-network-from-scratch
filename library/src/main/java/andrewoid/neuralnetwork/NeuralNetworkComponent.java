@@ -1,4 +1,4 @@
-package andrewoid.neutralnetwork;
+package andrewoid.neuralnetwork;
 
 import javax.swing.*;
 import java.awt.*;
