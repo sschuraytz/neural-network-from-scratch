@@ -1,4 +1,4 @@
-package andrewoid.neutralnetwork;
+package andrewoid.neuralnetwork;
 
 import com.google.gson.Gson;
 

@@ -1,4 +1,4 @@
-package andrewoid.neutralnetwork;
+package andrewoid.neuralnetwork;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * Multi layer Neural andrewoid.neutralnetwork.Network object that encapsulates evaluation and training.
+ * Multi layer Neural andrewoid.neuralnetwork.Network object that encapsulates evaluation and training.
  */
 public class Network {
 
@@ -28,7 +28,7 @@ public class Network {
             layers[i] = new Neuron[sizes[i]];
         }
 
-        // create each andrewoid.neutralnetwork.Neuron with links to the previous and next layers
+        // create each andrewoid.neuralnetwork.Neuron with links to the previous and next layers
         for (int i = 0; i < sizes.length; i++) {
             Neuron layer[] = layers[i];
             for (int j = 0; j < layer.length; j++) {
