@@ -1,9 +1,6 @@
 package andrewoid.neuralnetwork;
 
-import andrewoid.neutralnetwork.Network;
-import andrewoid.neutralnetwork.NetworkFactory;
-import andrewoid.neutralnetwork.Neuron;
-
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 /**
@@ -37,8 +34,7 @@ public class CalculatorNetworkTraining {
             {1, 1, 1, 1, 0, 1, 0}, // 9
     };
 
-    public static void main(String args[])
-    {
+    public static void main(String args[]) throws FileNotFoundException {
         Network network = new NetworkFactory().loadFromJSON("network.json");
         Neuron outputs[];
 
