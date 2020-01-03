@@ -2,23 +2,20 @@ package andrewoid.neuralnetwork;
 
 import com.google.gson.Gson;
 
-import java.io.FileReader;
+import java.io.*;
 
 public class NetworkFactory
 {
-    public Network loadFromJSON(String fileName)
+    public Network loadFromJSON(String fileName) throws FileNotFoundException
     {
-        Network network = null;
-        try(FileReader fileReader = new FileReader(fileName))
-        {
-            Gson gson = new Gson();
-            network = gson.fromJson(fileReader, Network.class);
-            network.connectNeurons();
-        }
-        catch (Exception exc)
-        {
-            exc.printStackTrace();
-        }
+        return loadFromJSON(new FileReader(fileName));
+    }
+
+    public Network loadFromJSON(Reader reader)
+    {
+        Gson gson = new Gson();
+        Network network = gson.fromJson(reader, Network.class);
+        network.connectNeurons();
         return network;
     }
 }
