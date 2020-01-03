@@ -14,18 +14,12 @@ public class DigitFrame extends JFrame {
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        Digit digit = new Digit();
         ResultScreen resultScreen = new ResultScreen();
-        EvaluateButton evaluateButton = new EvaluateButton(network, resultScreen);
-        evaluateButton.addActionListener(e -> {
-            EvaluateButton button = (EvaluateButton) e.getSource();
-            button.evaluate(digit.getLinesStatus());
-        });
+        Digit digit = new Digit(network, resultScreen);
 
         JPanel root = new JPanel(new BorderLayout());
         root.add(digit, BorderLayout.CENTER);
         root.add(resultScreen, BorderLayout.EAST);
-        root.add(evaluateButton, BorderLayout.SOUTH);
 
         setContentPane(root);
     }
