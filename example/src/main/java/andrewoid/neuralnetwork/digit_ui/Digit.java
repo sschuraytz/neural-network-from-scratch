@@ -1,9 +1,11 @@
 package andrewoid.neuralnetwork.digit_ui;
 
-import javax.swing.*;
+import andrewoid.neutralnetwork.Network;
+import andrewoid.neutralnetwork.Neuron;
+
+import javax.swing.JPanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Arrays;
 
 public class Digit extends JPanel {
 
@@ -13,12 +15,16 @@ public class Digit extends JPanel {
     private final int lineThickness = 10;
     private final int sideMargin = (DigitFrame.WIDTH - lineLength) / 2;
     private final int topMargin = (DigitFrame.HEIGHT - (lineLength * 2)) / 2;
+    private Network network;
+    private ResultScreen resultScreen;
 
-    public Digit() {
+    public Digit(Network network, ResultScreen resultScreen) {
         linesStatus = new double[DIGIT_LINES];
         setSize(DigitFrame.WIDTH, DigitFrame.HEIGHT);
         setLayout(null);
         createDigit();
+        this.network = network;
+        this.resultScreen = resultScreen;
     }
 
     private void createDigit() {
@@ -85,6 +91,7 @@ public class Digit extends JPanel {
                 public void mouseReleased(MouseEvent e) {
                     digitLine.changeStatus();
                     linesStatus[digitLine.getId()] = digitLine.getStatus();
+                    evaluate(linesStatus);
                 }
 
                 @Override
@@ -101,12 +108,26 @@ public class Digit extends JPanel {
         }
     }
 
-    /**
+    public void evaluate(double[] input) {
+        // test the network on the input sets, printing out everything that evaluates to greater than 10%
+        StringBuilder result = new StringBuilder();
+        Neuron[] outputs = network.evaluate(input);
+        for (int i = 0; i < outputs.length; i++) {
+            double value = outputs[i].getValue();
+            if (value > 0.90) {
+                result.append(i);
+                result.append(" ");
+            }
+        }
+        resultScreen.setText(result.toString());
+    }
+
+/*    *//**
      *
      * @return deep copy of the array that represents which parts of the digit are selected. The selected parts of the
      * digit should be used by the neural network to determine which number is represented
-     */
+     *//*
     public double[] getLinesStatus() {
         return Arrays.copyOf(linesStatus, linesStatus.length);
-    }
+    }*/
 }
