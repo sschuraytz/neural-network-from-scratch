@@ -40,11 +40,11 @@ public class NeuralNetworkComponent extends JComponent {
         }
         for (int i = 0; i < layers.length; i++) {
             for (int j = 0; j < layers[i].length; j++) {
-                neuronColorValue = (int) layers[i][j].getValue() * COLOR_RANGE;
+                neuronColorValue = (int) (layers[i][j].getValue() * COLOR_RANGE);
                 neuronColor = new Color(neuronColorValue);
                 drawNeuron(i, j, neuronColor, g);
                 for (int k = 0; k < layers[i][j].getNumWeights(); k++) {
-                    pathWeight = (int) (((layers[i][j].getWeight(k)) - weightMin) / weightMax) * COLOR_RANGE;
+                    pathWeight = (int) ((((layers[i][j].getWeight(k)) - weightMin) / weightMax) * COLOR_RANGE);
                     pathColor = new Color(pathWeight);
                     drawConnection(i, j, k, pathColor, g);
                 }
