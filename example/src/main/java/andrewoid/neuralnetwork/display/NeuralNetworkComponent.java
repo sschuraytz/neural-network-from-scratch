@@ -1,19 +1,21 @@
 package andrewoid.neuralnetwork.display;
 
-import andrewoid.neutralnetwork.Neuron;
-import andrewoid.neutralnetwork.Network;
+import andrewoid.neuralnetwork.Network;
+import andrewoid.neuralnetwork.Neuron;
 
 import javax.swing.*;
 import java.awt.*;
 
 
 public class NeuralNetworkComponent extends JComponent {
+    private static final int COLOR_RANGE = 16777215;
     int start = 25;
     int size = 10;
     int space = 200;
     int space2 = 50;
+    double weightMin = 0;
+    double weightMax = 1;
     Network network;
-    Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.CYAN, Color.MAGENTA, Color.PINK};
 
     public NeuralNetworkComponent(Network network) {
         this.network = network;
@@ -22,19 +24,31 @@ public class NeuralNetworkComponent extends JComponent {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Color neuronColor = Color.BLACK;
-        int neuronValue;
+        Color neuronColor;
+        int neuronColorValue;
         int pathWeight;
-        Color pathColor = Color.BLACK;
+        Color pathColor;
         Neuron[][] layers = network.getLayers();
         for (int i = 0; i < layers.length; i++) {
             for (int j = 0; j < layers[i].length; j++) {
-                neuronValue = (int) layers[i][j].getValue();
-                neuronColor = colors[neuronValue];
+                for (int k = 0; k < layers[i][j].getNumWeights(); k++) {
+                    if (weightMin > layers[i][j].getWeight(k)) {
+                        weightMin = layers[i][j].getWeight(k);
+                    }
+                    if (weightMax < layers[i][j].getWeight(k)) {
+                        weightMax = layers[i][j].getWeight(k);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < layers.length; i++) {
+            for (int j = 0; j < layers[i].length; j++) {
+                neuronColorValue = (int) (layers[i][j].getValue() * COLOR_RANGE);
+                neuronColor = new Color(neuronColorValue);
                 drawNeuron(i, j, neuronColor, g);
                 for (int k = 0; k < layers[i][j].getNumWeights(); k++) {
-                    pathWeight = (int) layers[i][j].getWeight(k);
-                    pathColor = colors[pathWeight];
+                    pathWeight = (int) ((((layers[i][j].getWeight(k)) - weightMin) / weightMax) * COLOR_RANGE);
+                    pathColor = new Color(pathWeight);
                     drawConnection(i, j, k, pathColor, g);
                 }
             }
