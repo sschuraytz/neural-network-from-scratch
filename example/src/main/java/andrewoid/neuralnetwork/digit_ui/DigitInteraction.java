@@ -7,7 +7,7 @@ import java.util.Random;
 public class DigitInteraction {
 
     public static void main(String[] args) {
-        Network network = new Network(7, 2, 15, 15, 6, 10);
+        Network network = new Network(7, 15, 15, 10);
         trainNetwork(network);
         new DigitFrame(network).setVisible(true);
     }
@@ -42,7 +42,7 @@ public class DigitInteraction {
         Random random = new Random();
 
         // train the network on random input and output sets.
-        for (int i = 0; i < 4000000; i++) {     //can't train much more without extremely long run time
+        for (int i = 0; i < 40000; i++) {     //can't train much more without extremely long run time
             int set = random.nextInt(inputs.length);
             network.train(inputs[set], expectedOutputs[set], 0.3);
         }

@@ -1,6 +1,5 @@
 package andrewoid.neuralnetwork;
 
-import andrewoid.neuralnetwork.MNISTReader.IdxReader;
 import andrewoid.neutralnetwork.Network;
 import andrewoid.neutralnetwork.Neuron;
 
@@ -58,7 +57,7 @@ public class CalculatorNetworkTraining {
         Random random = new Random();
 
         // train the network on random input and output sets.
-        for (int i = 0; i < 40000; i++) {
+        for (int i = 0; i < 100000; i++) {
             int set = random.nextInt(inputs.length);
             network.train(inputs[set], expectedOutputs[set], 0.3);
         }
