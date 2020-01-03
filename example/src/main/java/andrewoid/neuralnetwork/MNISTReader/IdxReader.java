@@ -3,10 +3,51 @@ package andrewoid.neuralnetwork.MNISTReader;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 
 public class IdxReader
 {
+
+    class MnistIterator implements Iterator<MNISTTrainingFile>
+    {
+
+        private int position = 0;
+
+        @Override
+        public boolean hasNext() {
+            return position < numberOfImages;
+        }
+
+        @Override
+        public MNISTTrainingFile next() {
+            if (hasNext()) {
+                for (int p = 0; p < numberOfPixels; p++) {
+                    int gray = 0;
+                    try {
+                        gray = 255 - inImage.read();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    imgPixels[p] = 0xFF000000 | (gray << 16) | (gray << 8) | gray;
+                }
+
+                int label = 0;
+                try {
+                    label = inLabel.read();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ++position;
+                return new MNISTTrainingFile(imgPixels, label);
+            }
+            else {
+                return null;
+            }
+        }
+    }
 
     private String inputImagePath;
     private String inputLabelPath;
@@ -32,6 +73,11 @@ public class IdxReader
         this.inputLabelPath = inputLabelPath;
     }
 
+    public Iterator<MNISTTrainingFile> iterator() {
+        initializeVariables();
+        return new MnistIterator();
+    }
+
     /*
     * Resource I utilized to decompress the files:
     * https://stackoverflow.com/questions/17279049/reading-a-idx-file-type-in-java
@@ -49,34 +95,31 @@ public class IdxReader
 
         try
         {
-            initializeVariables();
-
-            for(int i = 0; i < numberOfImages; i++) {
-
-                if(i % 100 == 0) {System.out.println("Number of images extracted: " + i);}
-
-                for(int p = 0; p < numberOfPixels; p++) {
-                    int gray = 255 - inImage.read();
-                    imgPixels[p] = 0xFF000000 | (gray<<16) | (gray<<8) | gray;
-                }
-
-                image.setRGB(0, 0, numberOfColumns, numberOfRows, imgPixels, 0, numberOfColumns);
-
-                int label = inLabel.read();
-
-                hashMap[label]++;
-                File outputfile = new File(outputPath + "/" + label + "/" + hashMap[label] + ".png");
-
-                ImageIO.write(image, "png", outputfile);
+            Iterator<MNISTTrainingFile> iterator = iterator();
+            while(iterator.hasNext())
+            {
+                MNISTTrainingFile next = iterator.next();
+                writeIndividualFile(hashMap, next.getLabel());
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+        }  finally {
             closeFileStreams();
         }
+    }
+
+    public void writeIndividualFile(int[] hashMap, int label)
+    {
+
+            image.setRGB(0, 0, numberOfColumns, numberOfRows, imgPixels, 0, numberOfColumns);
+
+            hashMap[label]++;
+            File outputFile = new File(outputPath + "/" + label + "/" + hashMap[label] + ".png");
+
+            try {
+                boolean wrote = ImageIO.write(image, "png", outputFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     private void closeFileStreams() {

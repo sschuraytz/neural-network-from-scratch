@@ -1,4 +1,4 @@
-package andrewoid.neutralnetwork;
+package andrewoid.neuralnetwork;
 
 /**
  * Simple building block of Neural Networks that holds a value, bias, weights to the previous layer and
@@ -20,7 +20,7 @@ public class Neuron {
     private double error;
 
     /**
-     * Construct a andrewoid.neutralnetwork.Neuron connected to the previous layer of Neurons
+     * Construct a andrewoid.neuralnetwork.Neuron connected to the previous layer of Neurons
      *
      * @param previousLayer
      */
@@ -62,7 +62,7 @@ public class Neuron {
     }
 
     /**
-     * Computer the value of this andrewoid.neutralnetwork.Neuron given the previousLayer and weights.
+     * Computer the value of this andrewoid.neuralnetwork.Neuron given the previousLayer and weights.
      */
     public void computeValue() {
         double sum = bias;
@@ -76,7 +76,7 @@ public class Neuron {
     }
 
     /**
-     * Compute the error if the andrewoid.neutralnetwork.Neuron was in the outer most layer.
+     * Compute the error if the andrewoid.neuralnetwork.Neuron was in the outer most layer.
      *
      * @param expectedValue
      */
@@ -85,7 +85,7 @@ public class Neuron {
     }
 
     /**
-     * Compute the error if the andrewoid.neutralnetwork.Neuron was in an inner layer of the network.
+     * Compute the error if the andrewoid.neuralnetwork.Neuron was in an inner layer of the network.
      */
     public void computeInnerError() {
         double sum = 0;
