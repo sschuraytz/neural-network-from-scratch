@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 public class DisplayNeuralNetwork extends JFrame {
 
     public DisplayNeuralNetwork() throws FileNotFoundException {
-        Network network = new NetworkFactory().loadFromJSON("network.json");
+        Network network = new NetworkFactory().loadFromJSON("mnist.json");  //TODO: pass in as args instead of hardcoding
         final NeuralNetworkComponent neuralNetworkComponent = new NeuralNetworkComponent(network);
         setTitle("NeuralNetwork");
         setSize(1100, 900);
