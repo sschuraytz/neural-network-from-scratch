@@ -13,7 +13,7 @@ public class DisplayNeuralNetwork extends JFrame {
         Network network = new NetworkFactory().loadFromJSON("mnist.json");  //TODO: pass in as args instead of hardcoding
         final NeuralNetworkComponent neuralNetworkComponent = new NeuralNetworkComponent(network);
         setTitle("NeuralNetwork");
-        setSize(1100, 900);
+        setSize(1000, 900);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JPanel root = new JPanel();
         root.setLayout(new BorderLayout());

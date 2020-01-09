@@ -3,27 +3,32 @@ package andrewoid.neuralnetwork.display;
 import andrewoid.neuralnetwork.Network;
 import andrewoid.neuralnetwork.Neuron;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 
 
 public class NeuralNetworkComponent extends JComponent {
     private static final int COLOR_RANGE = 255;//16777215;
-    int start = 25;
-    int neuronSize;
-    double weightMin = 0;
-    double weightMax = 1;
-    Network network;
-    int horizontalSpace;
-    int verticalSpace;
+    private int start = 25;
+    private int neuronSize;
+    private double weightMin = 0;
+    private double weightMax = 1;
+    private Network network;
+    private int horizontalSpace;
+    private double verticalSpaceLeft, verticalSpaceRight;
+    int counter = 0;
 
     public NeuralNetworkComponent(Network network) {
         this.network = network;
     }
 
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
         Neuron[][] layers = network.getLayers();
         setSizing(layers);
         Color neuronColor;
@@ -44,7 +49,14 @@ public class NeuralNetworkComponent extends JComponent {
             }
         }
         for (int i = 0; i < layers.length; i++) {
-            for (int j = 0; j < layers[i].length; j++) {
+            int layerLength = layers[i].length;
+
+            double potentialVerticalSpace = (double)getHeight() / (double)layerLength;
+            if (i > 0) {
+                verticalSpaceLeft = verticalSpaceRight;
+            }
+            verticalSpaceRight = potentialVerticalSpace > 1 ? potentialVerticalSpace : 15;
+            for (int j = 0; j < layerLength; j++) {
                 neuronColorValue = (int) (layers[i][j].getValue() * COLOR_RANGE);
                 if (neuronColorValue < 0) {
                     neuronColorValue = 0;
@@ -53,11 +65,12 @@ public class NeuralNetworkComponent extends JComponent {
                     neuronColorValue = 255;
                 }
                 neuronColor = new Color(0, neuronColorValue, 0);
-                drawNeuron(i, j, neuronColor, g);
+                drawNeuron(i, j, neuronColor, graphics);
+
                 for (int k = 0; k < layers[i][j].getNumWeights(); k++) {
                     pathWeight = (int) ((layers[i][j].getWeight(k) - weightMin) / (weightMax - weightMin) * COLOR_RANGE);
                     pathColor = new Color(0, pathWeight, 0);
-                    drawConnection(i, j, k, pathColor, g);
+                    drawConnection(i, j, k, pathColor, graphics);
                 }
             }
         }
@@ -65,9 +78,7 @@ public class NeuralNetworkComponent extends JComponent {
 
     private void setSizing(Neuron[][] layers) {
         int maxLength = calculateLargestLayer(layers);
-        horizontalSpace = this.getWidth() / layers.length;
-        double potentialVerticalSpace = (double)this.getHeight() / (double)maxLength;
-        verticalSpace = potentialVerticalSpace > 1 ? (int)potentialVerticalSpace : 15;
+        horizontalSpace = getWidth() / (layers.length - 1) - start;
         neuronSize = maxLength > 30 ? 4 : 10;
     }
 
@@ -82,18 +93,21 @@ public class NeuralNetworkComponent extends JComponent {
     }
 
     private void drawNeuron(int row, int column, Color color, Graphics g) {
-        g.setColor(color);
-        g.fillOval(start + (row * horizontalSpace),
-                start + (column * verticalSpace),
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(color);
+        g2d.fill(new Ellipse2D.Double(start + (row * horizontalSpace),
+                start + (column * verticalSpaceRight),
                 neuronSize,
-                neuronSize);
+                neuronSize));
     }
 
     private void drawConnection(int row, int column, int number, Color color, Graphics g) {
-        g.setColor(color);
-        g.drawLine(start + ((row - 1) * horizontalSpace) + neuronSize,
-                start + (number * verticalSpace) + (int) (neuronSize / 2),
+        System.out.println(counter++);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(color);
+        g2d.draw(new Line2D.Double(start + ((row - 1) * horizontalSpace) + neuronSize,
+                start + (number * verticalSpaceLeft) + (neuronSize / 2.0),
                 start + ((row) * horizontalSpace),
-                start + (column * verticalSpace) + (int) (neuronSize / 2));
+                start + (column * verticalSpaceRight) + (neuronSize / 2.0)));
     }
 }
