@@ -1,7 +1,7 @@
 package andrewoid.neuralnetwork.digit_ui;
 
-import andrewoid.neutralnetwork.Network;
-import andrewoid.neutralnetwork.Neuron;
+import andrewoid.neuralnetwork.Network;
+import andrewoid.neuralnetwork.Neuron;
 
 import javax.swing.JPanel;
 import java.awt.event.MouseEvent;

@@ -8,15 +8,17 @@ public class ReaderLoading {
     private static final String testingInputImagePath = "t10k-images-idx3-ubyte";
     private static final String testingInputLabelPath = "t10k-labels-idx1-ubyte";
 
-    private static final String outputPath = "MNISTOutputFiles/";
+    private static final String trainingOutputPath = "TrainingMNISTOutputFiles/";
+    private static final String testingOutputPath = "TestingMNISTOutputFiles/";
 
     public static void main(String[] args)
     {
-        IdxReader reader = new IdxReader(trainingInputImagePath,trainingInputLabelPath,outputPath);
-        reader.loadFromCompressedFilesToOutputDir();
+        boolean saveUncompressedToFile = true;
+        IdxReader reader = new IdxReader(trainingInputImagePath,trainingInputLabelPath,trainingOutputPath);
+        reader.loadFromCompressedFilesToOutputDir(saveUncompressedToFile);
         System.out.println("Adding the testing files now");
-        reader.resetInputImageAndFilePath(testingInputImagePath, testingInputLabelPath);
-        reader.loadFromCompressedFilesToOutputDir();
+        reader.resetInputImageAndFilePath(testingInputImagePath, testingInputLabelPath, testingOutputPath);
+        reader.loadFromCompressedFilesToOutputDir(saveUncompressedToFile);
 //        ArrayList<MNISTTrainingFile> mnistTrainingFiles = reader.getMnistTrainingFiles();
     }
 }

@@ -3,6 +3,7 @@
 out/
 build/
 target/
-MNISTOutputFiles/
+TrainingMNISTOutputFiles/
+TestingMNISTOutputFiles/
 neural-network-from-scratch.iml
 

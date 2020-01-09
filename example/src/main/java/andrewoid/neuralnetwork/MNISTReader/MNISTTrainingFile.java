@@ -23,4 +23,14 @@ public class MNISTTrainingFile
     {
         return label;
     }
+
+    public double[] getImgPixelsAsDoubles()
+    {
+        double[] imgPixelsDoubles = new double[imgPixels.length];
+        for(int ix = 0; ix < imgPixels.length; ++ix)
+        {
+            imgPixelsDoubles[ix] = imgPixels[ix];
+        }
+        return imgPixelsDoubles;
+    }
 }
