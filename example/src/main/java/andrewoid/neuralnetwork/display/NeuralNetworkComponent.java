@@ -20,7 +20,6 @@ public class NeuralNetworkComponent extends JComponent {
     private Network network;
     private int horizontalSpace;
     private double verticalSpaceLeft, verticalSpaceRight;
-    int counter = 0;
 
     public NeuralNetworkComponent(Network network) {
         this.network = network;
@@ -102,7 +101,6 @@ public class NeuralNetworkComponent extends JComponent {
     }
 
     private void drawConnection(int row, int column, int number, Color color, Graphics g) {
-        System.out.println(counter++);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(color);
         g2d.draw(new Line2D.Double(start + ((row - 1) * horizontalSpace) + neuronSize,
