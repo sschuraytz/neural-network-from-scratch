@@ -8,7 +8,7 @@ import java.awt.*;
 
 
 public class NeuralNetworkComponent extends JComponent {
-    private static final int COLOR_RANGE = 16777215;
+    private static final int COLOR_RANGE = 255;//16777215;
     int start = 25;
     int size = 10;
     int space = 200;
@@ -44,11 +44,11 @@ public class NeuralNetworkComponent extends JComponent {
         for (int i = 0; i < layers.length; i++) {
             for (int j = 0; j < layers[i].length; j++) {
                 neuronColorValue = (int) (layers[i][j].getValue() * COLOR_RANGE);
-                neuronColor = new Color(neuronColorValue);
+                neuronColor = new Color(0, neuronColorValue, 0);
                 drawNeuron(i, j, neuronColor, g);
                 for (int k = 0; k < layers[i][j].getNumWeights(); k++) {
-                    pathWeight = (int) ((((layers[i][j].getWeight(k)) - weightMin) / weightMax) * COLOR_RANGE);
-                    pathColor = new Color(pathWeight);
+                    pathWeight = (int) ((layers[i][j].getWeight(k) - weightMin) / (weightMax - weightMin) * COLOR_RANGE);
+                    pathColor = new Color(0, pathWeight, 0);
                     drawConnection(i, j, k, pathColor, g);
                 }
             }
@@ -57,7 +57,7 @@ public class NeuralNetworkComponent extends JComponent {
 
     private void drawNeuron(int row, int column, Color color, Graphics g) {
         g.setColor(color);
-        g.drawOval(start + (row * space),
+        g.fillOval(start + (row * space),
                 start + (column * space2),
                 size,
                 size);
