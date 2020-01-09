@@ -1,8 +1,5 @@
 package andrewoid.neuralnetwork;
 
-import andrewoid.neutralnetwork.Network;
-import andrewoid.neutralnetwork.Neuron;
-import andrewoid.neutralnetwork.NetworkFactory;
 import org.junit.Test;
 
 import java.io.InputStream;
